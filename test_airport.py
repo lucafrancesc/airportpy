@@ -10,8 +10,12 @@ class TestAirport(unittest.TestCase):
         self.weather = Mock()
 
     @patch('airport.Airport.is_safe', return_value = True)
-    def test_is_safe_true(self, is_safe):
+    def test_is_safe_True(self, is_safe):
         self.assertTrue(self.airport.is_safe())
+
+    def test_landing(self):
+        self.airport.landing(self.plane)
+        self.assertIn(self.plane, self.airport.hangar)
 
     @patch('airport.Airport.is_safe', return_value = False)
     def test_is_safe_False(self, is_safe):

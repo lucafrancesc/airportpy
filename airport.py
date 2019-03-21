@@ -9,3 +9,7 @@ class Airport:
 
     def is_safe(self):
         return False if self.weather.is_stormy() else True
+
+    def landing(self, plane):
+        if self.is_safe():
+            self.hangar.append(plane)
