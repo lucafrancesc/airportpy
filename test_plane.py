@@ -9,5 +9,10 @@ class TestPlane(unittest.TestCase):
     def test_status(self):
         self.assertTrue(self.plane.is_flying())
 
+    def test_land(self):
+        self.plane.land()
+        self.assertFalse(self.plane.is_flying())
+    
+
 if __name__ == "__main__":
     unittest.main()

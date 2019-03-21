@@ -3,5 +3,7 @@ class Plane:
         self.flying = flying
 
     def is_flying(self):
-        if self.flying:
-            return True
+        return True if self.flying else False
+
+    def land(self):
+        self.flying = False
