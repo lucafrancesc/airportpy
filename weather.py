@@ -13,6 +13,3 @@ class Weather:
             self.safe = True
 
         return self.safe
-
-x = Weather()
-print(x.is_safe())
