@@ -6,4 +6,11 @@ class Plane:
         return True if self.flying else False
 
     def land(self):
-        self.flying = False
+        if self.is_flying():
+            self.flying = False
+        
+    def take_off(self):
+        if not self.is_flying():
+            self.flying = True
+        else:
+            raise Exception('Plane is flying')
