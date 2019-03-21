@@ -12,36 +12,36 @@ class Airport:
         return False if self.weather.is_stormy() else True
 
     def landing(self, plane):
+        self._in_hangar(plane)
+        self._full_hangar(plane)
+        if self.is_safe():
+            self._proceed_landing(plane)
+        else:
+            raise Exception('Too dangerous to land!')
+
+    def _in_hangar(self, plane):
         if plane in self.hangar:
             raise Exception('Plane already in the hangar')
 
+    def _full_hangar(self, plane):
         if len(self.hangar) >= self.capacity:
             raise Exception('No more space avaialble!')
 
-        if self.is_safe():
-            plane.land()
-            self.hangar.append(plane)
-            return self.hangar
-        else:
-            raise Exception('Too dangerous to land!')
+    def _proceed_landing(self, plane):
+        plane.land()
+        self.hangar.append(plane)
+        return self.hangar
 
     def take_off(self, plane):
         if not self.is_safe():
             raise Exception('Too dangerous to fly!')
 
         if plane in self.hangar:
-            plane.take_off()
-            self.hangar.remove(plane)
-            return self.hangar
+            self._proceed_take_off(plane)
         else:
             raise Exception('Plane not in the hangar')
 
-
-
-# x = Airport()
-# w = Plane()
-# x.landing(w)
-# # print()
-# print(x.hangar[0].is_flying())
-
-print(len([12]))
+    def _proceed_take_off(self, plane):
+        plane.take_off()
+        self.hangar.remove(plane)
+        return self.hangar
