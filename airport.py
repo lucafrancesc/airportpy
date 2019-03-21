@@ -2,4 +2,10 @@ from plane import Plane
 from weather import Weather
 
 class Airport:
-    pass
+    def __init__(self, city = 'london', weather = Weather()):
+        self.city = city
+        self.hangar = list()
+        self.weather = weather
+
+    def is_safe(self):
+        return False if self.weather.is_stormy() else True
