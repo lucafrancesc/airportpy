@@ -1,11 +1,18 @@
-import json
-import requests
-from api_token import api_token
+from parse_api import Api
+import re
 
-city = 'london'
+class Weather:
+    def __init__(self, safe = True, api = Api()):
+        self.safe = safe
+        self.api = api
 
+    def is_safe(self, city = 'london'):
+        if re.search('storm', Api(city).parsed_response()['weather'][0]['main']):
+            self.safe = False
+        else:
+            self.safe = True
 
-api_url = "http://api.openweathermap.org/data/2.5/weather?appid=%s&q=%s"%(api_token(), city)
-print(api_url)
-response = requests.get(api_url)
-print(json.loads(response.content.decode('utf-8')))
+        return self.safe
+
+x = Weather()
+print(x.is_safe())

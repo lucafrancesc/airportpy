@@ -10,13 +10,8 @@ class Api:
     def api_response(self):
         return requests.get(self.api_url)
 
-    def parsed_response(self, response = None):
-        if response == None:
-            response = self.api_response()
-        if response.ok:
-            return json.loads(response.content.decode('utf-8'))
+    def parsed_response(self):
+        if self.api_response().ok:
+            return json.loads(self.api_response().content.decode('utf-8'))
         else:
             return None
-
-x=Api('gatwick')
-print(x.parsed_response()['weather'][0]['main'])

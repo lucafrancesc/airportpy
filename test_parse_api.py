@@ -1,6 +1,7 @@
 from unittest.mock import patch
-from parse_api import Api
 import unittest
+from parse_api import Api
+
 
 
 class TestApi(unittest.TestCase):
@@ -14,7 +15,6 @@ class TestApi(unittest.TestCase):
     def test_response(self, mock_get):
         mock_get.return_value.status_code = 200
         self.assertEqual(self.response.status_code, 200)
-
 
 if __name__ == "__main__":
     unittest.main()
