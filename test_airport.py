@@ -25,6 +25,14 @@ class TestAirport(unittest.TestCase):
         self.airport.landing(self.plane)
         self.assertIn(self.plane, self.airport.hangar)
 
+    # SAFE TO LAND BUT NO MORE SPACES
+    @patch('airport.Airport.is_safe', return_value = True)
+    def test_is_safe_to_land_but_no_more_space_True(self, is_safe):
+        for i in range(0, 20):
+            plane = Mock()
+            self.airport.landing(plane)
+        with self.assertRaisesRegexp(Exception, 'No more space avaialble!'):
+            self.airport.landing(self.plane)
 
     # SAFE TO LAND BUT ALREADY LANDED
     @patch('airport.Airport.is_safe', return_value = True)

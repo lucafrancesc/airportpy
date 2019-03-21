@@ -2,7 +2,7 @@ from plane import Plane
 from weather import Weather
 
 class Airport:
-    def __init__(self, city = 'london', weather = Weather(), capacity = 20):
+    def __init__(self, city = 'london', capacity = 20, weather = Weather()):
         self.city = city
         self.hangar = list()
         self.capacity = capacity
@@ -15,7 +15,10 @@ class Airport:
         if plane in self.hangar:
             raise Exception('Plane already in the hangar')
 
-        if self.is_safe() and len(self.hangar)<self.capacity:
+        if len(self.hangar) >= self.capacity:
+            raise Exception('No more space avaialble!')
+
+        if self.is_safe():
             plane.land()
             self.hangar.append(plane)
             return self.hangar
@@ -40,3 +43,5 @@ class Airport:
 # x.landing(w)
 # # print()
 # print(x.hangar[0].is_flying())
+
+print(len([12]))
