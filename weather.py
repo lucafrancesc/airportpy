@@ -2,14 +2,14 @@ from parse_api import Api
 import re
 
 class Weather:
-    def __init__(self, safe = True, api = Api()):
-        self.safe = safe
+    def __init__(self, strormy = False, api = Api()):
+        self.strormy = strormy
         self.api = api
 
-    def is_safe(self, city = 'london'):
+    def is_stormy(self, city = 'london'):
         if re.search('storm', Api(city).parsed_response()['weather'][0]['main']):
-            self.safe = False
+            self.strormy = True
         else:
-            self.safe = True
+            self.strormy = False
 
-        return self.safe
+        return self.strormy
