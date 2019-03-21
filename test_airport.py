@@ -19,12 +19,19 @@ class TestAirport(unittest.TestCase):
     def test_is_safe_False(self, is_safe):
         self.assertFalse(self.airport.is_safe())
 
-
     # SAFE TO LAND
     @patch('airport.Airport.is_safe', return_value = True)
     def test_is_safe_to_land_True(self, is_safe):
         self.airport.landing(self.plane)
         self.assertIn(self.plane, self.airport.hangar)
+
+
+    # SAFE TO LAND BUT ALREADY LANDED
+    @patch('airport.Airport.is_safe', return_value = True)
+    def test_is_safe_to_land_but_landed(self, is_safe):
+        self.airport.landing(self.plane)
+        with self.assertRaisesRegexp(Exception, 'Plane already in the hangar'):
+            self.airport.landing(self.plane)
 
     # NOT SAFE TO LAND
     @patch('airport.Airport.is_safe', return_value = False)
@@ -38,6 +45,12 @@ class TestAirport(unittest.TestCase):
         self.airport.landing(self.plane)
         self.airport.take_off(self.plane)
         self.assertNotIn(self.plane, self.airport.hangar)
+
+    # NOT SAFE TO TAKE OFF
+    @patch('airport.Airport.is_safe', return_value = False)
+    def test_is_safe_to_take_off_False(self, is_safe):
+        with self.assertRaisesRegexp(Exception, 'Too dangerous to fly!'):
+            self.airport.take_off(self.plane)
 
 
 if __name__ == '__main__':
