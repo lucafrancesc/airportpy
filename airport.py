@@ -17,10 +17,16 @@ class Airport:
             self.hangar.append(plane)
             return self.hangar
         else:
+            raise Exception('Too dangerous to land!')
+
+    def take_off(self, plane):
+        # if plane.is_flying():
+            # the plane is flying!
+        if not self.is_safe():
             raise Exception('Too dangerous to fly!')
 
-# x = Airport()
-# w = Plane()
-# x.landing(w)
-# # print()
-# print(x.hangar[0].is_flying())
+        if plane in self.hangar:
+            plane.take_off()
+            self.hangar.remove(plane)
+            return self.hangar
+        
