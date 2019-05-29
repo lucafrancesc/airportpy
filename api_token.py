@@ -1,2 +1,2 @@
 def api_token():
-    return #YOUR TOKEN GOES HERE
+    return 'd5304678230fa3c9565b4803deacdd0e'
